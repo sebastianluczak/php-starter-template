@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: app
+  name: web
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+        - name: application
+          image: dev-php-fpm:1.3
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 9000
+              name: http
+              protocol: TCP
+            - containerPort: 9003
+              name: http-xdebug
+              protocol: TCP
+          volumeMounts:
+            - name: app-config-volume
+              mountPath: /usr/local/etc/php/conf.d/00_application.ini
+              subPath: php.ini
+            - name: code-mount
+              mountPath: /app/
+        - name: nginx
+          image: dev-nginx:1.1
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          volumeMounts:
+            - name: app-config-volume
+              mountPath: /etc/nginx/conf.d/00_application.conf
+              subPath: nginx.conf
+            - name: code-mount
+              mountPath: /app/
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+        - name: code-mount
+          hostPath:
+            path: /src
+        - name: app-config-volume
+          configMap:
+            name: app-config

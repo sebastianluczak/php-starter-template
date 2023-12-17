@@ -1,0 +1,24 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: web
+  namespace: default
+  labels:
+    app: app
+spec:
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+      name: http
+    - protocol: TCP
+      port: 9000
+      targetPort: 9000
+      name: php
+    - protocol: TCP
+      port: 9003
+      targetPort: 9003
+      name: xdebug
+  selector:
+    app: app
+  type: LoadBalancer

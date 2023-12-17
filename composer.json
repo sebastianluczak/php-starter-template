@@ -1,0 +1,41 @@
+{
+    "name": "night/development",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Sebastian Łuczak",
+            "email": "sebastian.m.luczak@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.3",
+        "ext-http": "*",
+        "phpstan/extension-installer": "^1.3",
+        "symfony/http-foundation": "7.1.x-dev",
+        "symfony/http-kernel": "7.1.x-dev",
+        "symfony/routing": "7.1.x-dev"
+    },
+    "require-dev": {
+        "ergebnis/composer-normalize": "dev-main",
+        "friendsofphp/php-cs-fixer": "dev-master",
+        "pestphp/pest": "2.x-dev",
+        "phparkitect/phparkitect": "dev-main",
+        "phpmd/phpmd": "dev-master",
+        "phpstan/phpstan": "1.11.x-dev",
+        "rector/rector": "dev-main",
+        "squizlabs/php_codesniffer": "^3.8"
+    },
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "BDev\\Foo\\": "src/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true,
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    }
+}

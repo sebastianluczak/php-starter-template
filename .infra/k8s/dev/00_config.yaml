@@ -1,0 +1,38 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: app-config
+data:
+  nginx.conf: |
+    server {
+        listen 8080 default_server;
+        listen [::]:8080 default_server;
+    
+        server_name _;
+        root        /app/public;
+        location / {
+            try_files $uri /index.php$is_args$args;
+        }
+        location ~ ^/index\.php(/|$) {
+            fastcgi_pass 127.0.0.1:9000;
+            fastcgi_read_timeout 300;
+            proxy_read_timeout 300;
+            fastcgi_split_path_info ^(.+\.php)(/.*)$;
+            include fastcgi_params;
+            fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+            fastcgi_param DOCUMENT_ROOT $realpath_root;
+            internal;
+        }
+        location ~ \.php$ {
+          return 404;
+        }
+        client_max_body_size 6m;
+        error_log  /var/log/nginx/error.log;
+        access_log /var/log/nginx/access.log;
+    }
+  php.ini: |
+    [assertions]
+    zend.assertions = 1
+    [xdebug]
+    xdebug.mode = debug
+    xdebug.remote = 1

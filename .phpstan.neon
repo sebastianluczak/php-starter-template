@@ -1,0 +1,13 @@
+parameters:
+    level: 9
+    paths:
+        - src
+        - public
+        - tests
+    ignoreErrors:
+        # Pest implicitly binds $this to the current test case
+        # @see https://pestphp.com/docs/underlying-test-case
+        -
+            message: '#^Undefined variable: \$this$#'
+            paths:
+                - tests/*
