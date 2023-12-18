@@ -16,8 +16,7 @@ final class ProductRepository implements ProductRepositoryInterface
     {
         return array_map(
             callback: fn(array $property): Product => new Product($property['name']),
-            /** @var array{name: string, amount: int} $property */
-            array: $properties
+            array: $properties,
         );
     }
 }

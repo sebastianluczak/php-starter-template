@@ -15,10 +15,10 @@ final readonly class ProductSnapshot
         public int $stock = 0,
     ) {
         if ($this->amount === 0) {
-            throw new Exception("Cannot request zero amount of " . $this->product->name);
+            throw new Exception('Cannot request zero amount of ' . $this->product->name);
         }
         if ($this->amount > $this->stock) {
-            throw new Exception("Out of stock for " . $this->product->name);
+            throw new Exception('Out of stock for ' . $this->product->name);
         }
     }
 }

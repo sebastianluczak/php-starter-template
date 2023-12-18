@@ -18,7 +18,7 @@ final readonly class CreateOrderHandler
     public function __invoke(CreateOrder $createOrder): OrderCreated
     {
         $products = $this->productRepository->getByProperties(
-            properties: $createOrder->products
+            properties: $createOrder->products,
         );
 
         $requestedStock = [];
@@ -29,8 +29,8 @@ final readonly class CreateOrderHandler
         return new OrderCreated(
             order: $this->orderRepository->create(
                 products: $products,
-                amounts: $requestedStock
-            )
+                amounts: $requestedStock,
+            ),
         );
     }
 }

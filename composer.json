@@ -27,7 +27,10 @@
         "phpstan/phpstan": "1.11.x-dev",
         "rector/rector": "dev-main",
         "squizlabs/php_codesniffer": "^3.8",
-        "pestphp/pest-plugin-type-coverage": "2.x-dev"
+        "pestphp/pest-plugin-type-coverage": "2.x-dev",
+        "mockery/mockery": "2.0.x-dev",
+        "phpstan/phpstan-mockery": "1.1.x-dev",
+        "kubawerlos/php-cs-fixer-custom-fixers": "^3.11"
     },
     "minimum-stability": "dev",
     "autoload": {

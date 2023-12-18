@@ -29,7 +29,7 @@ $routes->add('main', new Route(
     path: '/',
     defaults: [
         '_controller' => CreateOrder::class . '::index',
-    ]
+    ],
 ));
 
 $request = Request::createFromGlobals();

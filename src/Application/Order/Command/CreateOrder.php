@@ -13,6 +13,6 @@ final readonly class CreateOrder
      *  }> $products
      */
     public function __construct(
-        public array $products
+        public array $products,
     ) {}
 }

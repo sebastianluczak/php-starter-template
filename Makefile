@@ -85,7 +85,7 @@ checks: ## Fires all code tests and checks
 fix: ## Runs linter against ./src and ./tests
 	@$(eval crector=./vendor/bin/rector)
 	@$(eval cphpcsfix=./vendor/bin/php-cs-fixer fix --diff --verbose)
-	@$(eval cphpcodestyle=./vendor/bin/phpcs --report=full -s)
+	@$(eval cphpcodestyle=./vendor/bin/phpcs --report=full -p -s)
 	@echo "\033[1;32m🍺 Running PHP Rector check on codebase.\033[0m"
 	@$(EXEC_ON_PHP) $(crector)
 	@echo "\033[1;32m🍺 Running PHP-CS-Fixer fix on codebase.\033[0m"

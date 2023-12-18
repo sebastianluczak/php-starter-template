@@ -19,7 +19,7 @@ use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 final readonly class CreateOrder
 {
     public function index(
-        Request $request
+        Request $request,
     ): JsonResponse {
         if (!$request->isMethod(Request::METHOD_POST)) {
             throw new MethodNotAllowedHttpException(allow: [Request::METHOD_POST]);
@@ -31,14 +31,14 @@ final readonly class CreateOrder
         $content = (array)json_decode($request->getContent(), true);
         assert(array_key_exists('products', $content));
         $createOrder = new CreateOrderCommand(
-            products: $content['products']
+            products: $content['products'],
         );
         $createOrderHandler = new CreateOrderHandler(
             orderRepository: new OrderRepository(
                 priceService: new PriceService(),
-                stockService: new CurrentStockService()
+                stockService: new CurrentStockService(),
             ),
-            productRepository: new ProductRepository()
+            productRepository: new ProductRepository(),
         );
         $orderCreated = $createOrderHandler($createOrder);
 
@@ -48,7 +48,7 @@ final readonly class CreateOrder
                 'order' => $orderCreated->order,
                 'total_price' => $orderCreated->getTotalPrice(),
             ],
-            status: Response::HTTP_OK
+            status: Response::HTTP_OK,
         );
     }
 }

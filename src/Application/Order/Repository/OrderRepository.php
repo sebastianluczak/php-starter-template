@@ -7,14 +7,14 @@ namespace App\Application\Order\Repository;
 use App\Application\Price\PriceServiceInterface;
 use App\Application\Warehouse\StockServiceInterface;
 use App\Domain\Order;
-use App\Domain\Product\Product;
 use App\Domain\Product\ProductSnapshot;
+use DateTimeImmutable;
 
 final readonly class OrderRepository implements OrderRepositoryInterface
 {
     public function __construct(
         private PriceServiceInterface $priceService,
-        private StockServiceInterface $stockService
+        private StockServiceInterface $stockService,
     ) {}
 
     public function create(array $products, array $amounts): Order
@@ -25,12 +25,13 @@ final readonly class OrderRepository implements OrderRepositoryInterface
                 product: $product,
                 currentPrice: $this->priceService->getCurrentPriceForProduct($product),
                 amount: $amounts[$product->name],
-                stock: $this->stockService->getCurrentStockForProduct($product)
+                stock: $this->stockService->getCurrentStockForProduct($product),
             );
         }
 
         return new Order(
-            products: $snapshots
+            products: $snapshots,
+            createdAt: new DateTimeImmutable(),
         );
     }
 }

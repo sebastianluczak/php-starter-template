@@ -27,7 +27,10 @@ return static function (Config $config): void {
 
     $domainRules[] = Rule::allClasses()
         ->that(new ResideInOneOfTheseNamespaces('App\Domain'))
-        ->should(new NotHaveDependencyOutsideNamespace('App\Domain', ['Ramsey\Uuid', 'Random\Randomizer', 'Exception']))
+        ->should(new NotHaveDependencyOutsideNamespace(
+            'App\Domain',
+            ['Ramsey\Uuid', 'Random\Randomizer', 'Exception', 'DateTimeImmutable'])
+        )
         ->because('we want protect our domain except for Ramsey\Uuid and Random\Randomizer');
 
     $domainRules[] = Rule::allClasses()

@@ -19,7 +19,7 @@ final class ExceptionHandler
                 'controller' => $exceptionEvent->getRequest()->attributes->get('_controller'),
                 'client' => $exceptionEvent->getRequest()->headers->get('user-agent'),
             ],
-            status: Response::HTTP_INTERNAL_SERVER_ERROR
+            status: Response::HTTP_INTERNAL_SERVER_ERROR,
         ));
     }
 }

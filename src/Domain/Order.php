@@ -12,6 +12,7 @@ final readonly class Order
      * @param ProductSnapshot[] $products
      */
     public function __construct(
-        public array $products
+        public array $products,
+        public \DateTimeImmutable $createdAt,
     ) {}
 }

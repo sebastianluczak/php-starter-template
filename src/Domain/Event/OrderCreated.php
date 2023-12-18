@@ -10,7 +10,7 @@ use App\Domain\Product\ProductSnapshot;
 final readonly class OrderCreated
 {
     public function __construct(
-        public Order $order
+        public Order $order,
     ) {}
 
     public function getTotalPrice(): float
@@ -19,8 +19,8 @@ final readonly class OrderCreated
             array_map(
                 callback: fn(ProductSnapshot $productSnapshot)
                     => $productSnapshot->currentPrice * $productSnapshot->amount,
-                array: $this->order->products
-            )
+                array: $this->order->products,
+            ),
         );
     }
 }
