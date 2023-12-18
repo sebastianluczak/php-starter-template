@@ -58,7 +58,7 @@ list: ## Lists docker images in cluster
 	@$(MINIKUBE) $(c) | grep dev
 
 ## —— 💻 Application > 🦄 Codebase ————————————————————————————————————
-test: fix checks ## Run all tests
+test: fix checks fix-permissions ## Run all tests
 
 install: ## Installs project
 	@echo "\033[1;32m🍺 Running install script, please wait.\033[0m"
@@ -68,8 +68,9 @@ install: ## Installs project
 checks: ## Fires all code tests and checks
 	@$(eval cphpmd=./vendor/bin/phpmd src/ ansi .phpmd.ruleset.xml -vv --color)
 	@$(eval cphpstan=./vendor/bin/phpstan analyse -c .phpstan.neon)
-	@$(eval cpest=env XDEBUG_MODE=coverage ./vendor/bin/pest)
+	@$(eval cpest=env XDEBUG_MODE=coverage ./vendor/bin/pest --coverage)
 	@$(eval carkitect=./vendor/bin/phparkitect check)
+	@$(eval cypecheck=./vendor/bin/pest --type-coverage)
 	@echo "\033[1;32m🍺 Running Mess Detector on codebase.\033[0m"
 	@$(EXEC_ON_PHP) $(cphpmd)
 	@echo "\033[1;32m🍺 Running PHPStan on codebase.\033[0m"
@@ -78,6 +79,8 @@ checks: ## Fires all code tests and checks
 	@$(EXEC_ON_PHP) $(cpest)
 	@echo "\033[1;32m🍺 Running PHPArkitect on codebase.\033[0m"
 	@$(EXEC_ON_PHP) $(carkitect)
+	@echo "\033[1;32m🍺 Running Strict Type checks on codebase.\033[0m"
+	@$(EXEC_ON_PHP) $(cypecheck)
 
 fix: ## Runs linter against ./src and ./tests
 	@$(eval crector=./vendor/bin/rector)
@@ -91,5 +94,8 @@ fix: ## Runs linter against ./src and ./tests
 	@$(EXEC_ON_PHP) $(cphpcodestyle)
 
 ## —— 🎵 Help Section —————————————————————————————————————————————————
+fix-permissions: ## Fixes docker permissions
+	@$(EXEC_ON_PHP) chown 1000:1000 -R /app
+
 help: ## Outputs this help screen
 	@grep -E '(^[a-zA-Z0-9_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}{printf "\033[32m%-30s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'

@@ -3,6 +3,7 @@
          xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.3/phpunit.xsd"
          bootstrap="vendor/autoload.php"
          colors="true"
+         testdox="true"
 >
     <testsuites>
         <testsuite name="Test Suite">
@@ -11,11 +12,10 @@
     </testsuites>
     <source>
         <include>
-            <directory suffix=".php">./app</directory>
             <directory suffix=".php">./src</directory>
         </include>
     </source>
-    <coverage includeUncoveredFiles="true">
+    <coverage includeUncoveredFiles="true" pathCoverage="true">
         <report>
             <html outputDirectory="./coverage_report" />
         </report>

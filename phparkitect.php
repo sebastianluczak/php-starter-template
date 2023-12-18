@@ -4,18 +4,46 @@ declare(strict_types=1);
 
 use Arkitect\ClassSet;
 use Arkitect\CLI\Config;
+use Arkitect\Expression\ForClasses\DependsOnlyOnTheseNamespaces;
+use Arkitect\Expression\ForClasses\IsFinal;
+use Arkitect\Expression\ForClasses\IsNotAbstract;
+use Arkitect\Expression\ForClasses\NotDependsOnTheseNamespaces;
+use Arkitect\Expression\ForClasses\NotHaveDependencyOutsideNamespace;
+use Arkitect\Expression\ForClasses\ResideInOneOfTheseNamespaces;
 use Arkitect\Rules\Rule;
 
 return static function (Config $config): void {
     $classSet = ClassSet::fromDir(__DIR__.'/src');
 
-    $finalRule = Rule::allClasses()
-        ->that(new \Arkitect\Expression\ForClasses\ResideInOneOfTheseNamespaces('BDev\Foo'))
-        ->should(new \Arkitect\Expression\ForClasses\IsFinal())
+    $domainRules[] = Rule::allClasses()
+        ->that(new ResideInOneOfTheseNamespaces('App'))
+        ->should(new IsFinal())
         ->because('all classes should be final by default');
 
-    $config->add(
-        classSet: $classSet,
-        rules: $finalRule
-    );
+    $domainRules[] = Rule::allClasses()
+        ->that(new ResideInOneOfTheseNamespaces('App\Domain'))
+        ->should(new IsFinal())
+        ->because('all domain classes should be final.');
+
+    $domainRules[] = Rule::allClasses()
+        ->that(new ResideInOneOfTheseNamespaces('App\Domain'))
+        ->should(new NotHaveDependencyOutsideNamespace('App\Domain', ['Ramsey\Uuid', 'Random\Randomizer', 'Exception']))
+        ->because('we want protect our domain except for Ramsey\Uuid and Random\Randomizer');
+
+    $domainRules[] = Rule::allClasses()
+        ->that(new ResideInOneOfTheseNamespaces('App\Domain'))
+        ->should(new IsNotAbstract())
+        ->because('we want to avoid abstract classes into our domain');
+
+    $domainRules[] = Rule::allClasses()
+        ->that(new ResideInOneOfTheseNamespaces('App\Application'))
+        ->should(new DependsOnlyOnTheseNamespaces('App\Application', 'App\Domain'))
+        ->because('we want that application depends only on itself and domain namespace.');;
+
+    $domainRules[] = Rule::allClasses()
+        ->that(new ResideInOneOfTheseNamespaces('App\Application'))
+        ->should(new NotDependsOnTheseNamespaces('App\Infrastructure'))
+        ->because('we want to avoid coupling between application layer and infrastructure layer');
+
+    $config->add($classSet, ...$domainRules);
 };
