@@ -1,20 +1,34 @@
 # PHP 8.3 Startup Template
 
-This is template for new projects in PHP 8.3.
+This is a template for modern web projects based on PHP 8.3 and Symfony components.
 
-Provides `dev` composer.json with setup code quality tools.
+Provides pre-setup environment for Minikube with PHP project configured with latest PHP code quality tools.
 
 ## Infrastructure
 
-Setup as IaC, makes use of local minikube instance.
+Created as IaC, makes use of local MMinikube instance.
 All k8s definitions are located in `.infra` directory.
+
+You can build and use images on your own, there's simple `compose.yml` file for Docker provided.
 
 ## Code
 
-There's no code besides:
-- HTTP Symfony Kernel front controller in `index.php`
-- JSON Controller in `src/Controller.php`
-- Pest unit tests in `tests/Unit/ControllerTest.php`
+There's simple code provided in `./src` directory and simple Pest tests in `./tests`.
+
+This code follows all standards configured, you may review it for your liking.
+
+You can remove it and start from scratch with your own solution.
+
+## Code quality tools
+
+Configured are:
+- custom rules for PHP-CS-Fixer following latest PER-CS,
+- PSR12 rules for PHP_CS,
+- PHP-MessDetector with all rules enabled,
+- PHPStan on level 9,
+- PHPArkitect with basic architecture setup,
+- PHP Rector with simple configuration and ruleset for PHP 8.3,
+- Pest Unit Tests configured with code coverage reports
 
 ## Setup
 
