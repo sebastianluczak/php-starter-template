@@ -1,18 +1,18 @@
 # Business Requirements
 
-There's a system for placing some sort of **orders** for **products** by anonymous **clients**.
+There's a need for a **system** for placing some sort of **orders** for **products** by anonymous **clients**.
 
-Each product is unique and is identified by some `name`.
+Each **product** is unique and is identified by some `name`.
 
-Each product has random price at each point of time, which is obtained from 3-rd party service.
+Each **product** has random price at each point of time, which is obtained from 3-rd party service.
 
-Each order can consist of many products.
+Each **order** can consist of many products.
 
-Each product can be placed into order with any quantity, higher than one.
+Each **product** can be placed into order with any quantity, higher than one.
 
-Products have their stock.
+Each **product** has their own stock.
 
-If order is placed with given product and stock is not available on this product we should not create an order.
+If **order** is placed with given **product** and **stock** is not available on this **product** we should not create an **order**.
 
 We want to know total price of each order.
 
