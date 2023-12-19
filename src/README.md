@@ -48,6 +48,9 @@ Accept: application/json
 You'll get Response:
 
 ```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+
 {
   "message": "Order created",
   "products": [
