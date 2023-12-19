@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Product;
 
+use App\Domain\GoldCurrency;
 use Exception;
 
 final readonly class ProductSnapshot
@@ -20,5 +21,10 @@ final readonly class ProductSnapshot
         if ($this->amount > $this->stock) {
             throw new Exception('Out of stock for ' . $this->product->name);
         }
+    }
+
+    public function goldValue(): GoldCurrency
+    {
+        return new GoldCurrency($this->currentPrice * $this->amount);
     }
 }

@@ -1,0 +1,6 @@
+version: "3.8"
+services:
+  app-cli:
+    image: dev-php-fpm:1.3
+    volumes:
+      - ./:/app

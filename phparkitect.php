@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Arkitect\ClassSet;
 use Arkitect\CLI\Config;
 use Arkitect\Expression\ForClasses\DependsOnlyOnTheseNamespaces;
+use Arkitect\Expression\ForClasses\HaveNameMatching;
 use Arkitect\Expression\ForClasses\IsFinal;
 use Arkitect\Expression\ForClasses\IsNotAbstract;
 use Arkitect\Expression\ForClasses\NotDependsOnTheseNamespaces;
@@ -19,6 +20,11 @@ return static function (Config $config): void {
         ->that(new ResideInOneOfTheseNamespaces('App'))
         ->should(new IsFinal())
         ->because('all classes should be final by default');
+
+    $domainRules[] = Rule::allClasses()
+        ->that(new ResideInOneOfTheseNamespaces('App\Presentation\Controller'))
+        ->should(new HaveNameMatching('*Controller'))
+        ->because('controller classes should be named accordingly.');
 
     $domainRules[] = Rule::allClasses()
         ->that(new ResideInOneOfTheseNamespaces('App\Domain'))

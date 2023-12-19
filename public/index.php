@@ -7,7 +7,7 @@ namespace App;
 include_once __DIR__ . '/../vendor/autoload.php';
 
 use App\Infrastructure\Http\ExceptionHandler;
-use App\Presentation\Controller\CreateOrder;
+use App\Presentation\Controller\CreateOrderController;
 use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,7 +28,7 @@ $routes = new RouteCollection();
 $routes->add('main', new Route(
     path: '/',
     defaults: [
-        '_controller' => CreateOrder::class . '::index',
+        '_controller' => CreateOrderController::class . '::index',
     ],
 ));
 

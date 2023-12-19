@@ -84,7 +84,6 @@ return (new PhpCsFixer\Config())
         PhpCsFixerCustomFixers\Fixer\PhpdocVarAnnotationToAssertFixer::name() => true,
         # Constructor properties must be promoted if possible.
         PhpCsFixerCustomFixers\Fixer\PromotedConstructorPropertyFixer::name() => true,
-
     ])
     ->setRiskyAllowed(true)
     ->setUsingCache(false)

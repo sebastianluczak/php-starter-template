@@ -16,16 +16,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
-final readonly class CreateOrder
+final readonly class CreateOrderController
 {
     public function index(
         Request $request,
     ): JsonResponse {
         if (!$request->isMethod(Request::METHOD_POST)) {
-            throw new MethodNotAllowedHttpException(allow: [Request::METHOD_POST]);
+            throw new MethodNotAllowedHttpException(
+                allow: [Request::METHOD_POST],
+                message: 'Method not allowed.',
+            );
         }
         if (!json_validate($request->getContent())) {
-            throw new BadRequestException();
+            throw new BadRequestException('Provide proper json.');
         }
 
         $content = (array)json_decode($request->getContent(), true);
@@ -45,8 +48,10 @@ final readonly class CreateOrder
         return new JsonResponse(
             data: [
                 'message' => 'Order created',
-                'order' => $orderCreated->order,
+                'products' => $orderCreated->order->products,
                 'total_price' => $orderCreated->getTotalPrice(),
+                'coins' => $orderCreated->order->numberOfCoins(),
+                'created_at' => $orderCreated->order->createdAt->getTimestamp(),
             ],
             status: Response::HTTP_OK,
         );

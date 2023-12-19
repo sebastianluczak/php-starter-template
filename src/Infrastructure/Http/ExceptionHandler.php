@@ -15,7 +15,9 @@ final class ExceptionHandler
         $exceptionEvent->setResponse(new JsonResponse(
             data: [
                 'message' => $exceptionEvent->getThrowable()->getMessage(),
-                'errno' => $exceptionEvent->getThrowable()->getLine(),
+                'location' => $exceptionEvent->getThrowable()->getFile()
+                    . ':'
+                    . $exceptionEvent->getThrowable()->getLine(),
                 'controller' => $exceptionEvent->getRequest()->attributes->get('_controller'),
                 'client' => $exceptionEvent->getRequest()->headers->get('user-agent'),
             ],

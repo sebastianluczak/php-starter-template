@@ -15,4 +15,12 @@ final readonly class Order
         public array $products,
         public \DateTimeImmutable $createdAt,
     ) {}
+
+    public function numberOfCoins(): int
+    {
+        return array_sum(array_map(
+            callback: fn(ProductSnapshot $productSnapshot) => $productSnapshot->goldValue()->numberOfCoins(),
+            array: $this->products,
+        ));
+    }
 }
