@@ -34,7 +34,7 @@ You can remove it and start from scratch with your own solution.
 
 You need to have [Minikube](https://minikube.sigs.k8s.io/docs/start/) installed on your local machine as this project utilizes kubernetes IaC definitions.
 
-After installing Minikube clone this repository and run:
+Clone this repository and run:
 
 ```shell
 $ make start && make build && make deploy && make install && make checks
