@@ -14,7 +14,7 @@ Each **product** has their own stock, which is obtained from 3-rd party service.
 
 If **order** is placed with given **product** and **stock** is not available on this **product** we should not create an **order**.
 
-We want to know total price of each order.
+We want to know total price of each order, which consists of sum of all prices of all products at given time if they're available at that time.
 
 (OPTIONAL) We want to have custom currency implemented, so each order can be valued in "gold coins"
 
