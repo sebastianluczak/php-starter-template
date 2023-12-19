@@ -10,7 +10,7 @@ Each **order** can consist of many products.
 
 Each **product** can be placed into order with any quantity, higher than one.
 
-Each **product** has their own stock.
+Each **product** has their own stock, which is obtained from 3-rd party service.
 
 If **order** is placed with given **product** and **stock** is not available on this **product** we should not create an **order**.
 
