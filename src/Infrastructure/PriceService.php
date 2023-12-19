@@ -12,6 +12,10 @@ final class PriceService implements PriceServiceInterface
 {
     public function getCurrentPriceForProduct(Product $product): float
     {
+        if ($product->warehouse === 'default') {
+            syslog(0, 'Using default warehouse');
+        }
+
         return (new Randomizer())->getFloat(10, 200);
     }
 }

@@ -15,7 +15,10 @@ final class ProductRepository implements ProductRepositoryInterface
     public function getByProperties(array $properties): array
     {
         return array_map(
-            callback: fn(array $property): Product => new Product($property['name']),
+            callback: fn(array $property): Product => new Product(
+                name: $property['name'],
+                warehouse: 'default',
+            ),
             array: $properties,
         );
     }

@@ -15,4 +15,66 @@
         <exclude name="Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingAfterHint"/>
         <exclude name="Generic.NamingConventions.UpperCaseConstantName.ClassConstantNotUpperCase"/>
     </rule>
+    <rule ref="SlevomatCodingStandard.Variables.DisallowVariableVariable">
+    </rule>
+    <rule ref="SlevomatCodingStandard.Arrays.TrailingArrayComma">
+    </rule>
+    <rule ref="SlevomatCodingStandard.Classes.ForbiddenPublicProperty">
+    </rule>
+    <rule ref="SlevomatCodingStandard.Classes.PropertyDeclaration">
+    </rule>
+    <rule ref="SlevomatCodingStandard.Complexity.Cognitive">
+        <properties>
+            <property name="warningThreshold" value="4"/>
+            <property name="errorThreshold " value="5"/>
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Classes.RequireAbstractOrFinal">
+    </rule>
+    <rule ref="SlevomatCodingStandard.Classes.RequireMultiLineMethodSignature">
+    </rule>
+    <rule ref="SlevomatCodingStandard.Commenting.UselessFunctionDocComment">
+    </rule>
+    <rule ref="SlevomatCodingStandard.ControlStructures.EarlyExit">
+    </rule>
+    <rule ref="SlevomatCodingStandard.ControlStructures.DisallowTrailingMultiLineTernaryOperator">
+    </rule>
+    <rule ref="SlevomatCodingStandard.ControlStructures.DisallowYodaComparison">
+    </rule>
+    <rule ref="SlevomatCodingStandard.PHP.UselessParentheses">
+    </rule>
+    <rule ref="SlevomatCodingStandard.PHP.RequireExplicitAssertion">
+    </rule>
+    <rule ref="SlevomatCodingStandard.Exceptions.DeadCatch">
+    </rule>
+    <rule ref="SlevomatCodingStandard.Variables.UnusedVariable">
+    </rule>
+    <rule ref="SlevomatCodingStandard.Functions.UnusedParameter">
+    </rule>
+    <rule ref="SlevomatCodingStandard.Functions.UselessParameterDefaultValue">
+    </rule>
+    <rule ref="SlevomatCodingStandard.Functions.RequireTrailingCommaInCall">
+        <properties>
+            <property name="enable" value="true"/>
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Functions.RequireTrailingCommaInDeclaration">
+        <properties>
+            <property name="enable" value="true"/>
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Functions.RequireMultiLineCall">
+        <properties>
+            <property name="minLineLength" value="100"/>
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Functions.RequireArrowFunction">
+    </rule>
+    <rule ref="SlevomatCodingStandard.ControlStructures.RequireMultiLineCondition">
+        <properties>
+            <property name="minLineLength" value="0"/>
+            <property name="booleanOperatorOnPreviousLine " value="false"/>
+            <property name="alwaysSplitAllConditionParts " value="true"/>
+        </properties>
+    </rule>
 </ruleset>

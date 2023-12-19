@@ -16,6 +16,10 @@ final class CurrentStockService implements StockServiceInterface
 
     public function getCurrentStockForProduct(Product $product): int
     {
+        if ($product->warehouse === 'default') {
+            syslog(0, 'Using default warehouse');
+        }
+
         return (new Randomizer())->getInt(self::MIN_STOCK, self::MAX_STOCK);
     }
 }

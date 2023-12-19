@@ -19,7 +19,8 @@ final readonly class Order
     public function numberOfCoins(): int
     {
         return array_sum(array_map(
-            callback: fn(ProductSnapshot $productSnapshot) => $productSnapshot->goldValue()->numberOfCoins(),
+            callback: fn(ProductSnapshot $productSnapshot)
+                => $productSnapshot->goldValue()->numberOfCoins(),
             array: $this->products,
         ));
     }
