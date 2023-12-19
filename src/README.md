@@ -23,12 +23,13 @@ Write a system for handling this type of orders.
 # Solution
 
 Code in `./src`.
+
 Tests in `./tests`.
 
-* PHPStan level: 9
-* Type coverage: 100%
-* Code coverage: 100%
-* Path coverage: ~93%
+   * PHPStan level: 9
+   * Type coverage: 100%
+   * Code coverage: 100%
+   * Path coverage: ~93%
 
 Send API Request:
 
