@@ -6,18 +6,10 @@ Provides pre-setup environment for Minikube with PHP project configured with lat
 
 ## Infrastructure
 
-Created as IaC, makes use of local MMinikube instance.
+Created as IaC, makes use of local Minikube instance.
 All k8s definitions are located in `.infra` directory.
 
 You can build and use images on your own, there's simple `compose.yml` file for Docker provided.
-
-## Code
-
-There's simple code provided in `./src` directory and simple Pest tests in `./tests`.
-
-This code follows all standards configured, you may review it for your liking.
-
-You can remove it and start from scratch with your own solution.
 
 ## Code quality tools
 
@@ -29,6 +21,14 @@ Configured are:
 - PHPArkitect with basic architecture setup,
 - PHP Rector with simple configuration and ruleset for PHP 8.3,
 - Pest Unit Tests configured with code coverage reports
+
+## Code
+
+There's simple code provided in `./src` directory and simple Pest tests in `./tests`.
+
+This code follows all standards configured, you may review it for your liking.
+
+You can remove it and start from scratch with your own solution.
 
 ## Setup
 
