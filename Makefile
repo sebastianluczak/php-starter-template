@@ -4,7 +4,7 @@ MINIKUBE = minikube
 KUBECTL  = kubectl
 
 # Versions of internal docker images. Bump them on each infra change.
-PHP_FPM_VERSION = "1.3"
+PHP_FPM_VERSION = "1.5"
 NGINX_VERSION = "1.1"
 
 # Misc
@@ -58,7 +58,7 @@ list: ## Lists docker images in cluster
 	@$(MINIKUBE) $(c) | grep dev
 
 ## —— 💻 Application > 🦄 Codebase ————————————————————————————————————
-test: fix checks fix-permissions ## Run all tests
+test: fix checks ## Run all tests
 
 install: ## Installs project
 	@echo "\033[1;32m🍺 Running install script, please wait.\033[0m"
@@ -97,8 +97,5 @@ fix: ## Runs linter against ./src and ./tests
 	@$(EXEC_ON_PHP) $(cphpcodestyle)
 
 ## —— 🎵 Help Section —————————————————————————————————————————————————
-fix-permissions: ## Fixes docker permissions
-	@$(EXEC_ON_PHP) chown 1000:1000 -R /app
-
 help: ## Outputs this help screen
 	@grep -E '(^[a-zA-Z0-9_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}{printf "\033[32m%-30s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'

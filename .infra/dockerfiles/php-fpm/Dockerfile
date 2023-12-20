@@ -7,7 +7,11 @@ RUN apt-get update \
       libzip-dev \
       libicu-dev \
       libzip4 \
+      # We want to get some files from web anyway
       wget \
+      # Text editor, quite niche
+      joe \
+      # ZIP is too popular to not have it
       zip
 
 # Add install-php-extensions script
@@ -23,11 +27,16 @@ RUN install-php-extensions @composer
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Nice bash prompt
-RUN wget "https://gist.githubusercontent.com/zachbrowne/8bc414c9f30192067831fafebd14255c/raw/322a762de6300c6afff4469c9c73b4dd8449d394/The%2520Ultimate%2520Bad%2520Ass%2520.bashrc%2520File" -O ~/.bashrc
-
 # Point to mounted directory
 WORKDIR /app
+
+# Make everything as `application` user for security
+RUN addgroup --gid 1000 application
+RUN adduser --ingroup application --shell /bin/bash application
+USER application
+
+# Nice bash prompt because why not
+RUN wget "https://raw.githubusercontent.com/sebastianluczak/linux-helpers/main/bash/.bashrc" -O ~/.bashrc
 
 # Expose and keep it running
 EXPOSE 9000

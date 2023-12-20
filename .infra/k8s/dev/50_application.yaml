@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: application
-          image: dev-php-fpm:1.3
+          image: dev-php-fpm:1.5
           imagePullPolicy: Never
           ports:
             - containerPort: 9000

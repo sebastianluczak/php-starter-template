@@ -37,7 +37,7 @@ You need to have [Minikube](https://minikube.sigs.k8s.io/docs/start/) installed 
 Clone this repository and run:
 
 ```shell
-$ make start && make build && make deploy && make install && make checks
+$ make start build deploy install test
 ```
 
 Above will:
